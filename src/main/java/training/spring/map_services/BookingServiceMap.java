@@ -49,7 +49,7 @@ public class BookingServiceMap implements BookingService {
     public void bookTicket(User user, Ticket ticket) {
         if (user != null) {
             ticket.setUser(user);
-            user.addTicket(ticket);
+            /*user.addTicket(ticket);*/
         }
         bookedTickets.put(++ticketsCount, ticket);
         Event event = ticket.getEvent();

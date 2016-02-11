@@ -81,7 +81,7 @@ public class BookingServiceJdbc implements BookingService {
     public void bookTicket(User user, final Ticket ticket) {
         if (user != null) {
             ticket.setUser(user);
-            user.addTicket(ticket);
+            /*user.addTicket(ticket);*/
         }
         template.update(new PreparedStatementCreator() {
             @Override

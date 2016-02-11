@@ -1,8 +1,11 @@
 package training.spring.jdbc_services;
 
-import training.spring.beans.Ticket;
-import training.spring.beans.User;
-import training.spring.services.UserService;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Collection;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -10,11 +13,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
+import training.spring.beans.User;
+import training.spring.services.UserService;
 
 public class UserServiceJdbc implements UserService {
     private static final String TABLE_NAME = "users";
@@ -72,12 +72,6 @@ public class UserServiceJdbc implements UserService {
     }
 
     @Override
-    public void remove(User user) {
-        int usedId = user.getId();
-        remove(usedId);
-    }
-
-    @Override
     public void remove(int id) {
         jdbcTemplate.update(DELETE_QUERY, new Object[]{id});
     }
@@ -97,11 +91,11 @@ public class UserServiceJdbc implements UserService {
         return jdbcTemplate.query(GET_BY_NAME, new Object[]{firstName, lastName}, new UserMapper());
     }
 
-    //TODO: add implementation
+/*    //TODO: add implementation
     @Override
     public Collection<Ticket> getBookedTickets(User user) {
         return null;
-    }
+    }*/
 
     @Override
     public Collection<User> getAll() {
@@ -132,5 +126,11 @@ public class UserServiceJdbc implements UserService {
             user.setBirthday(resultSet.getDate("birthday"));
             return user;
         }
+    }
+
+    @Override
+    public void update(User user) {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -1,12 +1,11 @@
 package training.spring.map_services;
 
-import training.spring.beans.Ticket;
-import training.spring.beans.User;
-import training.spring.services.UserService;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+
+import training.spring.beans.User;
+import training.spring.services.UserService;
 
 public class UserServiceMap implements UserService {
     private Map<Integer, User> users;
@@ -62,13 +61,20 @@ public class UserServiceMap implements UserService {
         return foundUsers;
     }
 
-    public Collection<Ticket> getBookedTickets(User user) {
+/*    public Collection<Ticket> getBookedTickets(User user) {
         User storedUser = users.get(user.getId());
+        return null;
         return storedUser.getBookedTickets();
-    }
+    }*/
 
     @Override
     public Collection<User> getAll() {
         return users.values();
+    }
+
+    @Override
+    public void update(User user) {
+        // TODO Auto-generated method stub
+        
     }
 }

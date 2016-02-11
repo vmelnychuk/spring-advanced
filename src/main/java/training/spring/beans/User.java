@@ -1,20 +1,32 @@
 package training.spring.beans;
 
-import java.util.Collection;
 import java.util.Date;
-import java.util.LinkedList;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "email")
     private String email;
     private String password;
     private Date birthday;
-    Collection<Ticket> bookedTickets;
+    /*Collection<Ticket> bookedTickets;*/
 
     public User() {
-        bookedTickets = new LinkedList<Ticket>();
     }
 
     public User(String firstName, String lastName, String email, String password, Date birthday) {
@@ -23,7 +35,7 @@ public class User {
         this.email = email;
         this.birthday = birthday;
         this.password = password;
-        bookedTickets = new LinkedList<Ticket>();
+        /*bookedTickets = new LinkedList<Ticket>();*/
     }
 
     public String getPassword() {
@@ -58,13 +70,13 @@ public class User {
         this.email = email;
     }
 
-    public Collection<Ticket> getBookedTickets() {
+/*    public Collection<Ticket> getBookedTickets() {
         return bookedTickets;
     }
 
     public void setBookedTickets(Collection<Ticket> bookedTickets) {
         this.bookedTickets = bookedTickets;
-    }
+    }*/
 
     public Date getBirthday() {
         return birthday;
@@ -86,9 +98,9 @@ public class User {
         return firstName + " " + lastName;
     }
 
-    public void addTicket(Ticket ticket) {
+/*    public void addTicket(Ticket ticket) {
         bookedTickets.add(ticket);
-    }
+    }*/
 
     /**
      * email field {@link User#getEmail()} is id of user
@@ -121,8 +133,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", birthday=" + birthday +
-                ", bookedTickets=" + bookedTickets +
-                '}';
+                ", birthday=" + birthday + "}";
     }
 }
