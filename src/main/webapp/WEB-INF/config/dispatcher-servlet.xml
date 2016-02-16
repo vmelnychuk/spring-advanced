@@ -19,14 +19,18 @@
         <property name="order" value="2"/>
     </bean>
 
-    <!--<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">-->
-        <!--<property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>-->
-    <!--</bean>-->
-    <!--<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">-->
-        <!--<property name="cache" value="true"/>-->
-        <!--<property name="prefix" value=""/>-->
-        <!--<property name="suffix" value=".vm"/>-->
-    <!--</bean>-->
+    <bean id="velocityConfig"
+        class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/"/>
+    </bean>
+    <bean id="velocityViewResolver"
+        class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value="/WEB-INF/velocity/view/"/>
+        <property name="layoutUrl" value="/WEB-INF/velocity/layout/layout.vm"/>
+        <property name="suffix" value=".vm"/>
+        <property name="order" value="1"/>
+    </bean>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="100000"/>

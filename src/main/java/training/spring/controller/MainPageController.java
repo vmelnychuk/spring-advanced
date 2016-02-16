@@ -11,4 +11,9 @@ public class MainPageController {
     public String mainMenu() {
         return "index";
     }
+    
+    @RequestMapping(value = "/velo", method = RequestMethod.GET)
+    public String velocity() {
+        return "vindex";
+    }
 }
