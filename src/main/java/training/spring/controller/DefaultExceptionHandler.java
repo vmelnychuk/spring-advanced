@@ -1,6 +1,7 @@
 package training.spring.controller;
 
-import org.springframework.ui.Model;
+import java.util.Arrays;
+
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,7 +13,8 @@ public class DefaultExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(Exception e) {
         ModelAndView model = new ModelAndView(DEFAULT_ERROR_VIEW);
-        model.addObject("exception", e.getMessage());
+        model.addObject("exception", e);
+        model.addObject("stack", Arrays.toString(e.getStackTrace()));
         return model;
     }
 }
