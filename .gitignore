@@ -9,3 +9,6 @@
 
 # Maven
 target
+
+# Junk files
+.DS_Store
