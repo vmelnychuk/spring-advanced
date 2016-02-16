@@ -3,7 +3,12 @@
 ## Notes:
 - use MySQL, check db.properties for details
 - files to import: users.json, events.json, auditoriums.json
-- use JSP instead of Velocity
+
+### Doing:
+- Moving to velocity:
+  - http://o7planning.org/web/fe/default/en/document/132382/spring-mvc-and-velocity-tutorial
+  - http://stackoverflow.com/questions/9989472/spring-mvc-velocity-template-structure
+  - http://jatechs.blogspot.com.by/2013/02/integrating-velocity-with-spring-mvc.html
 
 
 ## Task description:
