@@ -10,9 +10,9 @@
 <div class="container">
     <h1>Exception</h1>
     <a class="btn btn-primary" href="<spring:url value="/"/>">Go Back</a>
-    <br/>
+    <p>${exception}</p>
     <a class="btn btn-primary" role="button" data-toggle="collapse" href="#stack" aria-expanded="false" aria-controls="stack">
-    ${exception}
+    Show/Hide
     </a>
     <div class="collapse" id="stack">
     <div class="well">

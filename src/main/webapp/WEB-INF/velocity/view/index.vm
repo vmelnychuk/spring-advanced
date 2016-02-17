@@ -1,0 +1,25 @@
+<h1>Cinema Main Page</h1>
+
+<h2>Auditoriums</h2>
+<ul>
+    <li><a href="#springUrl("/auditorium/list")">list of auditoriums</a></li>
+    <li><a href="#springUrl("/auditorium/add")">add auditorium</a></li>
+    <li><a href="#springUrl("/auditorium/export")" target="_blank">export to JSON</a></li>
+    <li><a href="#springUrl("/auditorium/import")">import from JSON</a></li>
+</ul>
+
+<h2>Users</h2>
+<ul>
+    <li><a href="#springUrl("/user/list")">list of users</a></li>
+    <li><a href="#springUrl("/user/add")">add user</a></li>
+    <li><a href="#springUrl("/user/export")" target="_blank">export to JSON</a></li>
+    <li><a href="#springUrl("/user/import")">import from JSON</a></li>
+</ul>
+
+<h2>Events</h2>
+<ul>
+    <li><a href="#springUrl("/event/list")">list of events</a></li>
+    <li><a href="#springUrl("/event/add")">add event</a></li>
+    <li><a href="#springUrl("/event/export")" target="_blank">export to JSON</a></li>
+    <li><a href="#springUrl("/event/import")">import from JSON</a></li>
+</ul>

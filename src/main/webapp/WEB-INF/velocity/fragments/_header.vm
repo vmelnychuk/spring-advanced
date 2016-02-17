@@ -1,8 +1,10 @@
-<div style="background: #E0E0E0; height: 80px; padding: 5px;">
-   <div style="float: left">
-       <h1>My Site</h1>
-   </div>
-   <div style="float: right; padding: 10px;">
-       Search <input name="search">
-   </div>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="#springUrl("/assets/css/bootstrap.css")" rel="stylesheet" type="text/css">
+    <link href="#springUrl("/assets/img/favicon.ico")" rel="icon" type="image/x-icon">
+    <title>Cinema</title>
+</head>
+<body>
+<div class="container">

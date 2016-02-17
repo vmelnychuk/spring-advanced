@@ -10,4 +10,6 @@ public interface AuditoriumService {
     Auditorium add(Auditorium auditorium);
     void addAll(List<Auditorium> auditoriums);
     Auditorium update(Auditorium auditorium);
+    Auditorium getById(Long id);
+    void delete(Long id);
 }

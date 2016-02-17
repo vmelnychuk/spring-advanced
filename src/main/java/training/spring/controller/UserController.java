@@ -3,16 +3,14 @@ package training.spring.controller;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import training.spring.entity.User;
 import training.spring.service.UserService;
@@ -74,10 +72,22 @@ public class UserController {
         return "redirect:list";
     }
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String onServerException(Model model, Exception ex) {
-        model.addAttribute("exception", ex.getMessage());
-        return "exception";
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editPage(Model model, @PathVariable("id") Long id) {
+        User user = userService.getById(id);
+        model.addAttribute("user", user);
+        return "user-edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String edit(@ModelAttribute("user")User user) {
+        userService.save(user);
+        return "redirect:/user/list";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Long id) {
+        userService.delete(id);
+        return "redirect:/user/list";
     }
 }

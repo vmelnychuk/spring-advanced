@@ -1,22 +1,3 @@
-<html>
-<head>
-  <title>Spring & Velocity</title>
-</head>
-<body>
-   <div>
-       #parse("/WEB-INF/velocity/fragments/_header.vm")
-   </div>
-    
-    
-   <div>
-    
-     <!-- View abc.vm is inserted here -->
-     $screen_content
- 
-   </div>
-    
-   <div>
-       #parse("/WEB-INF/velocity/fragments/_footer.vm")
-   </div>
-</body>
-</html>
+#parse("/WEB-INF/velocity/fragments/_header.vm")
+$screen_content
+#parse("/WEB-INF/velocity/fragments/_footer.vm")

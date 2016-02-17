@@ -14,6 +14,6 @@ public class MainPageController {
     
     @RequestMapping(value = "/velo", method = RequestMethod.GET)
     public String velocity() {
-        return "vindex";
+        return "/WEB-INF/velocity/view/index.vm";
     }
 }

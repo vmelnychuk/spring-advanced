@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,12 +47,8 @@ public class AuditoriumController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute ("auditorium")Auditorium auditorium, BindingResult result) {
-        if(result.hasErrors()) {
-            return "auditorium-add";
-        } else {
-            auditoriumService.add(auditorium);
-        }
+    public String update(@Valid @ModelAttribute ("auditorium")Auditorium auditorium) {
+        auditoriumService.add(auditorium);
         return "redirect:list";
     }
 
@@ -81,5 +78,24 @@ public class AuditoriumController {
         }
         auditoriumService.addAll(auditoriums);
         return "redirect:list";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editPage(Model model, @PathVariable("id") Long id) {
+        Auditorium auditorium = auditoriumService.getById(id);
+        model.addAttribute("auditorium", auditorium);
+        return "auditorium-edit";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String edit(@ModelAttribute("auditorium")Auditorium auditorium) {
+        auditoriumService.update(auditorium);
+        return "redirect:/auditorium/list";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Long id) {
+        auditoriumService.delete(id);
+        return "redirect:/auditorium/list";
     }
 }

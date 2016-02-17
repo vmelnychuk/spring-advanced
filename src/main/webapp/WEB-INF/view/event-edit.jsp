@@ -3,22 +3,29 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-    <title>Event Import</title>
+    <title>User</title>
     <link href="<spring:url value="/assets/css/bootstrap.css"/>" rel="stylesheet" type="text/css">
     <link href="<spring:url value="/assets/img/favicon.ico"/>" rel="icon" type="image/x-icon">
 </head>
 <body>
 <div class="container">
-    <h1>Import event data</h1>
+    <h1>Register user</h1>
     <a class="btn btn-primary" href="<spring:url value="/"/>">Go Back</a>
-    <form:form commandName="user" enctype="multipart/form-data">
+    <form:form commandName="event">
         <table>
             <tr>
-                <td>Event file</td>
-                <td><input type="file" name="file"/></td>
+                <td>Event name</td>
+                <td><form:input path="name" value="${event.name}"/></td>
             </tr>
             <tr>
-                <td colspan="2"><button type="submit" class="btn btn-default">Import</button></td>
+                <td>Event price</td>
+                <td><form:input path="price" value="${event.price}"/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="hidden" value="${event.id}">
+                    <button type="submit" class="btn btn-default">Update</button>
+                </td>
             </tr>
         </table>
     </form:form>

@@ -3,22 +3,33 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-    <title>User Import</title>
+    <title>User</title>
     <link href="<spring:url value="/assets/css/bootstrap.css"/>" rel="stylesheet" type="text/css">
     <link rel="icon" href="<spring:url value="/assets/img/favicon.ico"/>" type="image/x-icon">
 </head>
 <body>
 <div class="container">
-    <h1>Import user data</h1>
+    <h1>Update user</h1>
     <a class="btn btn-primary" href="<spring:url value="/"/>">Go Back</a>
-    <form:form commandName="user" enctype="multipart/form-data">
+    <form:form commandName="user">
         <table>
             <tr>
-                <td>User file</td>
-                <td><input type="file" name="file"/></td>
+                <td>User name</td>
+                <td><form:input path="name" value="${user.name}"/></td>
             </tr>
             <tr>
-                <td colspan="2"><button type="submit" class="btn btn-default">Import</button></td>
+                <td>User email</td>
+                <td><form:input path="email" value="${user.email}"/></td>
+            </tr>
+            <tr>
+                <td>User password</td>
+                <td><form:input path="password" value="${user.password}"/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="hidden" name="id" value="${user.id}">
+                    <button type="submit" class="btn btn-default">Update</button>
+                </td>
             </tr>
         </table>
     </form:form>

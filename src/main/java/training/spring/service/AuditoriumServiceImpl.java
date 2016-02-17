@@ -37,4 +37,14 @@ public class AuditoriumServiceImpl implements AuditoriumService {
     public Auditorium update(Auditorium auditorium) {
         return auditoriumRepository.save(auditorium);
     }
+
+    @Override
+    public Auditorium getById(Long id) {
+        return auditoriumRepository.findOne(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        auditoriumRepository.delete(id);
+    }
 }

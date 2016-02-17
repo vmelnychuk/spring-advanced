@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User user) {
+    public User save(User user) {
         return userRepository.save(user);
     }
 
@@ -46,5 +46,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addAll(List<User> users) {
         userRepository.save(users);
+    }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.delete(id);
     }
 }

@@ -14,14 +14,25 @@
     <a class="btn btn-primary" href="<spring:url value="/"/>">Go Back</a>
     <table class="table table-hover">
         <tr>
-            <th>id</th><th>email</th><th>name</th><th>password</th>
+            <th>id</th>
+            <th>email</th>
+            <th>name</th>
+            <th>password</th>
+            <th>edit</th>
+            <th>delete</th>
         </tr>
     <c:forEach items="${users}" var="user">
     <tr>
-        <td>${user.id}</td><td>${user.email}</td><td>${user.name}</td><td>${user.password}</td>
+        <td>${user.id}</td>
+        <td>${user.email}</td>
+        <td>${user.name}</td>
+        <td>${user.password}</td>
+        <td><a href="<spring:url value="/user/edit/${user.id}"/>" class="btn btn-warning">edit</a></td>
+        <td><a href="<spring:url value="/user/delete/${user.id}"/>" class="btn btn-danger">delete</a></td>
     </tr>
     </c:forEach>
     </table>
+    <a href="<spring:url value="/user/add"/>" class="btn btn-success">Add</a>
 </div>
 <script src="<spring:url value="/assets/js/jquery.js"/>"></script>
 <script src="<spring:url value="/assets/js/bootstrap.js"/>"></script>

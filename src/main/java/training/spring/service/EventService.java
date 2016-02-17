@@ -14,4 +14,5 @@ public interface EventService {
     List<Event> getAll();
     void assignAuditorium(Event event, Auditorium auditorium, Date date);
     void addAll(List<Event> events);
+    void delete(Long id);
 }
