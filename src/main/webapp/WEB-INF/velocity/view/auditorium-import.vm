@@ -1,0 +1,15 @@
+<h1>Import auditorium data</h1>
+#parse("/WEB-INF/velocity/fragments/_go_back.vm")
+<form enctype="multipart/form-data" method="post">
+    <table>
+        <tr>
+            <td>Auditorium file</td>
+            <td><input type="file" name="file"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" class="btn btn-primary">Import</button>
+            </td>
+        </tr>
+    </table>
+</form>

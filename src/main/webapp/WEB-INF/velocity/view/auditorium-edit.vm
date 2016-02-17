@@ -1,4 +1,4 @@
-<h1>Add auditorium</h1>
+<h1>Edit auditorium</h1>
 #parse("/WEB-INF/velocity/fragments/_go_back.vm")
 <form method="post">
     #springBind("auditorium")
@@ -13,6 +13,7 @@
         </tr>
         <tr>
             <td colspan="2">
+                <input type="hidden" value="${auditorium.id}"/>
                 <button type="submit" class="btn btn-primary">Add</button>
             </td>
         </tr>

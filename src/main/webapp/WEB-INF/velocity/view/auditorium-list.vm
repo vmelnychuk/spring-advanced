@@ -1,0 +1,21 @@
+<h1>Auditoriums</h1>
+#parse("/WEB-INF/velocity/fragments/_go_back.vm")
+<table class="table table-hover">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>seats</th>
+        <th>edit</th>
+        <th>delete</th>
+    </tr>
+    #foreach ($auditorium in ${auditoriums})
+        <tr>
+            <td>${auditorium.id}</td>
+            <td>${auditorium.name}</td>
+            <td>${auditorium.seats}</td>
+            <td><a href="#springUrl("/auditorium/edit/${auditorium.id}")" class="btn btn-warning">edit</a></td>
+            <td><a href="#springUrl("/auditorium/delete/${auditorium.id}")" class="btn btn-danger">delete</a></td>
+        </tr>
+    #end
+</table>
+<a href="#springUrl("/auditorium/add")" class="btn btn-success">Add</a>
