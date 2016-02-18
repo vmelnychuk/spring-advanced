@@ -1,10 +1,10 @@
 package training.spring.service;
 
-import training.spring.entity.Auditorium;
-import training.spring.entity.Event;
-
 import java.util.Date;
 import java.util.List;
+
+import training.spring.entity.Auditorium;
+import training.spring.entity.Event;
 
 public interface EventService {
     Event save(Event event);

@@ -1,0 +1,30 @@
+<h1>Assign event</h1>
+#parse("/WEB-INF/velocity/fragments/_go_back.vm")
+<form method="post">
+<table class="table table-hover">
+    <tr>
+        <th>date (yyyy-mm-dd)</th>
+        <th>event</th>
+        <th>auditorium</th>
+        <th>action</th>
+    </tr>
+    <tr>
+        <td><input type="text" name="date"/></td>
+        <td>
+        <select name="event-id">
+            #foreach ($event in ${events})
+                <option value="${event.id}">${event.name}</option>
+            #end
+        </select>
+        </td>
+        <td>
+            <select name="auditorium-id">
+                #foreach ($auditorium in ${auditoriums})
+                    <option value="${auditorium.id}">${auditorium.name}</option>
+                #end
+            </select>
+        </td>
+        <td><button type="submit" class="btn btn-primary">Assign</button></td>
+    </tr>
+</table>
+</form>

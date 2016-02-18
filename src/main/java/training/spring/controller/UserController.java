@@ -1,5 +1,6 @@
 package training.spring.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import training.spring.entity.User;
 import training.spring.service.UserService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -89,5 +91,19 @@ public class UserController {
     public String delete(@PathVariable("id") Long id) {
         userService.delete(id);
         return "redirect:/user/list";
+    }
+    
+    @RequestMapping(value = "/find", method = RequestMethod.POST)
+    public String findUser(@RequestParam("email") String email, @RequestParam("name") String name, Model model) {
+        List<User> users = null;
+        if(StringUtils.isNotBlank(email)) {
+            User user = userService.getUserByEmail(email);
+            users = new ArrayList<>();
+            users.add(user);
+        } else if (StringUtils.isNotBlank(name)) {
+            users = userService.getUsersByName(name);
+        }
+        model.addAttribute("users", users);
+        return "user-list";
     }
 }

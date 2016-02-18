@@ -15,6 +15,22 @@
     <li><a href="#springUrl("/user/export")" target="_blank">export to JSON</a></li>
     <li><a href="#springUrl("/user/import")">import from JSON</a></li>
 </ul>
+<p>Find users by email or name</p>
+<form method="post" action="#springUrl("/user/find")">
+    <table>
+        <tr>
+            <td>email</td>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td><input type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit" class="btn btn-primary">Find</button></td>
+        </tr>
+    </table>
+</form>
 
 <h2>Events</h2>
 <ul>
@@ -22,4 +38,5 @@
     <li><a href="#springUrl("/event/add")">add event</a></li>
     <li><a href="#springUrl("/event/export")" target="_blank">export to JSON</a></li>
     <li><a href="#springUrl("/event/import")">import from JSON</a></li>
+    <li><a href="#springUrl("/event/assign")">assign date and auditorium</a></li>
 </ul>

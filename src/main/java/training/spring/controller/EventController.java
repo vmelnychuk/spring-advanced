@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import training.spring.entity.Auditorium;
 import training.spring.entity.Event;
+import training.spring.service.AuditoriumService;
 import training.spring.service.EventService;
 
 import java.io.IOException;
@@ -24,6 +27,9 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+    
+    @Autowired
+    private AuditoriumService auditoriumService;
 
     @RequestMapping(value = "/list")
     public String list(Model model) {
@@ -90,5 +96,14 @@ public class EventController {
     public String delete(@PathVariable("id") Long id) {
         eventService.delete(id);
         return "redirect:/event/list";
+    }
+    
+    @RequestMapping(value = "/assign", method = RequestMethod.GET)
+    public String assignEvent(Model model) {
+        List<Event> events = eventService.getAll();
+        List<Auditorium> auditoriums = auditoriumService.getAll();
+        model.addAttribute("events", events);
+        model.addAttribute("auditoriums", auditoriums);
+        return "event-assign";
     }
 }
