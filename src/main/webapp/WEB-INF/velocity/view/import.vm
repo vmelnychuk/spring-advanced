@@ -2,9 +2,13 @@
 #parse("/WEB-INF/velocity/fragments/_go_back.vm")
 <form method="post" enctype="multipart/form-data">
     <table>
-       <tr>
+        <tr>
             <td>Events file</td>
             <td><input type="file" name="eventFile"/></td>
+        </tr>
+        <tr>
+            <td>Assigned events file</td>
+            <td><input type="file" name="assignedFile"/></td>
         </tr>
         <tr>
             <td>Users file</td>
@@ -15,7 +19,9 @@
             <td><input type="file" name="auditoriumFile"/></td>
         </tr>
         <tr>
-            <td colspan="2"><button type="submit" class="btn btn-primary">Import</button></td>
+            <td colspan="2">
+                <button type="submit" class="btn btn-primary">Import</button>
+            </td>
         </tr>
     </table>
 </form>

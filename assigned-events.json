@@ -1,0 +1,1 @@
+[{"id":1,"auditorium":{"name":"Red","id":3,"seats":300},"event":{"name":"The Terminator","id":1,"price":100},"date":1450598400000},{"id":2,"auditorium":{"name":"Red","id":3,"seats":300},"event":{"name":"Interstellar","id":2,"price":200},"date":1455127200000}]

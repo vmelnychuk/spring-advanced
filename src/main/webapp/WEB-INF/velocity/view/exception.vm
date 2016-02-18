@@ -1,9 +1,10 @@
-    <h1>Exception</h1>
-    #parse("/WEB-INF/velocity/fragments/_go_back.vm")
-    <p>${exception}</p>
-    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#stack" aria-expanded="false" aria-controls="stack">
+<h1>Exception</h1>
+#parse("/WEB-INF/velocity/fragments/_go_back.vm")
+<p>${exception}</p>
+<a class="btn btn-primary" role="button" data-toggle="collapse" href="#stack" aria-expanded="false"
+   aria-controls="stack">
     Show/Hide
-    </a>
-    <div class="collapse" id="stack">
-        <div class="well">${stack}</div>
-     </div>
+</a>
+<div class="collapse" id="stack">
+    <div class="well">${stack}</div>
+</div>

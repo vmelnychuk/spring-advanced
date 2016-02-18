@@ -33,6 +33,7 @@
         <commons-fileupload.version>1.2.1</commons-fileupload.version>
         <commons-io.version>1.4</commons-io.version>
         <commons-lang3.version>3.4</commons-lang3.version>
+        <itext.version>2.1.7</itext.version>
     </properties>
 
     <build>
@@ -159,6 +160,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>${itext.version}</version>
         </dependency>
 
         <!-- JPA -->

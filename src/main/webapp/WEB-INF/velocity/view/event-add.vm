@@ -1,7 +1,7 @@
 <h1>Add event</h1>
 #parse("/WEB-INF/velocity/fragments/_go_back.vm")
 <form method="post">
-#springBind("event")
+    #springBind("event")
     <table>
         <tr>
             <td>Event name</td>
@@ -12,7 +12,9 @@
             <td>#springFormInput("event.price" "")</td>
         </tr>
         <tr>
-            <td colspan="2"><button type="submit" class="btn btn-primary">Add</button></td>
+            <td colspan="2">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </td>
         </tr>
     </table>
 </form>

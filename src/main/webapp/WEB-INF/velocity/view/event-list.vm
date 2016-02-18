@@ -9,12 +9,13 @@
         <th>delete</th>
     </tr>
     #foreach ($event in ${events})
-    <tr>
-        <td>${event.id}</td>
-        <td>${event.name}</td><td>${event.price}</td>
-        <td><a href="#springUrl("/event/edit/${event.id}")" class="btn btn-warning">edit</a></td>
-        <td><a href="#springUrl("/event/delete/${event.id}")" class="btn btn-danger">delete</a></td>
-    </tr>
+        <tr>
+            <td>${event.id}</td>
+            <td>${event.name}</td>
+            <td>${event.price}</td>
+            <td><a href="#springUrl("/event/edit/${event.id}")" class="btn btn-warning">edit</a></td>
+            <td><a href="#springUrl("/event/delete/${event.id}")" class="btn btn-danger">delete</a></td>
+        </tr>
     #end
 </table>
 <a href="#springUrl("/event/add")" class="btn btn-success">Add</a>

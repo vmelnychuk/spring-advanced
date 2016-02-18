@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import training.spring.entity.AssignedEvent;
 import training.spring.entity.Auditorium;
 import training.spring.entity.Event;
 import training.spring.entity.User;
@@ -27,10 +28,10 @@ public class ImportController {
     
     @Autowired
     private EventService eventService;
-    
+
     @Autowired
     private AuditoriumService auditoriumService;
-    
+
     @RequestMapping(value = "/import", method = RequestMethod.GET)
     public String importPage() {
         return "import";
@@ -40,10 +41,12 @@ public class ImportController {
     public String importJon(
             @RequestParam("userFile") MultipartFile userFile,
             @RequestParam("eventFile") MultipartFile eventFile,
-            @RequestParam("auditoriumFile") MultipartFile auditoriumFile) {
+            @RequestParam("auditoriumFile") MultipartFile auditoriumFile,
+            @RequestParam("assignedFile") MultipartFile assignedFile) {
         List<User> users = null;
         List<Event> events = null;
         List<Auditorium> auditoriums = null;
+        List<AssignedEvent> assignedEvents = null;
         
         //TODO: refactor it
         if(!userFile.isEmpty()) {
@@ -81,10 +84,23 @@ public class ImportController {
                 throw new RuntimeException("import problem", e);
             }
         }
+
+        if(!assignedFile.isEmpty()) {
+            try {
+                byte[] bytes = assignedFile.getBytes();
+                String jsonString = new String(bytes, "UTF-8");
+                ObjectMapper mapper = new ObjectMapper();
+                assignedEvents = mapper.readValue(jsonString, new TypeReference<List<AssignedEvent>>(){});
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("import problem", e);
+            }
+        }
         
         userService.addAll(users);
         eventService.addAll(events);
         auditoriumService.addAll(auditoriums);
+        eventService.addAllAssignedEvents(assignedEvents);
         
         return "redirect:/";
     }

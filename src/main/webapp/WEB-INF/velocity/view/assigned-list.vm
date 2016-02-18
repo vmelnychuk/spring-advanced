@@ -1,0 +1,23 @@
+<h1>Assigned event list</h1>
+#parse("/WEB-INF/velocity/fragments/_go_back.vm")
+<table class="table table-hover">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>price</th>
+        <th>place</th>
+        <th>date</th>
+        <th>delete</th>
+    </tr>
+    #foreach ($assignedEvent in ${assignedEvents})
+        <tr>
+            <td>${assignedEvent.id}</td>
+            <td>${assignedEvent.event.name}</td>
+            <td>${assignedEvent.event.price}</td>
+            <td>${assignedEvent.auditorium.name}</td>
+            <td>${assignedEvent.date}</td>
+            <td><a href="#springUrl("/event/assigned/delete/${assignedEvent.id}")" class="btn btn-danger">delete</a></td>
+        </tr>
+    #end
+</table>
+<a href="#springUrl("/event/assign")" class="btn btn-success">Add</a>

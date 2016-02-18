@@ -1,7 +1,7 @@
 <h1>Register user</h1>
 #parse("/WEB-INF/velocity/fragments/_go_back.vm")
 <form method="post">
-#springBind("user")
+    #springBind("user")
     <table>
         <tr>
             <td>User name</td>
@@ -16,7 +16,9 @@
             <td>#springFormInput("user.password" "")</td>
         </tr>
         <tr>
-            <td colspan="2"><button type="submit" class="btn btn-primary">Add</button></td>
+            <td colspan="2">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </td>
         </tr>
     </table>
 </form>

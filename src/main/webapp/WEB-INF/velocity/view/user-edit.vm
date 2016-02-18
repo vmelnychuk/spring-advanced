@@ -1,8 +1,8 @@
-    <h1>Update user</h1>
-    #parse("/WEB-INF/velocity/fragments/_go_back.vm")
-    <form method="post">
+<h1>Update user</h1>
+#parse("/WEB-INF/velocity/fragments/_go_back.vm")
+<form method="post">
     #springBind("user")
-        <table>
+    <table>
         <tr>
             <td>User name</td>
             <td>#springFormInput("user.name" "")</td>
@@ -16,10 +16,10 @@
             <td>#springFormInput("user.password" "")</td>
         </tr>
         <tr>
-               <td colspan="2">
-                    <input type="hidden" name="id" value="${user.id}">
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </td>
-         </tr>
-        </table>
-    </form>
+            <td colspan="2">
+                <input type="hidden" name="id" value="${user.id}">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </td>
+        </tr>
+    </table>
+</form>

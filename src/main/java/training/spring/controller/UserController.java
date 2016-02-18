@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import training.spring.entity.User;
 import training.spring.service.UserService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -105,5 +109,16 @@ public class UserController {
         }
         model.addAttribute("users", users);
         return "user-list";
+    }
+
+    @RequestMapping("/pdf")
+    public ModelAndView pdfExport() {
+        Map<String,String> data = new LinkedHashMap<String,String>();
+        data.put("name", "email");
+        List<User> users = userService.getAll();
+        for(User user : users) {
+            data.put(user.getName(), user.getEmail());
+        }
+        return new ModelAndView("PdfReport", "data", data);
     }
 }

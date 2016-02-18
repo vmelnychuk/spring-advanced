@@ -13,6 +13,7 @@
     <li><a href="#springUrl("/user/list")">list of users</a></li>
     <li><a href="#springUrl("/user/add")">add user</a></li>
     <li><a href="#springUrl("/user/export")" target="_blank">export to JSON</a></li>
+    <li><a href="#springUrl("/user/pdf")" target="_blank">export to PDF</a></li>
     <li><a href="#springUrl("/user/import")">import from JSON</a></li>
 </ul>
 <p>Find users by email or name</p>
@@ -21,13 +22,11 @@
         <tr>
             <td>email</td>
             <td><input type="text" name="email"></td>
-        </tr>
-        <tr>
             <td>name</td>
             <td><input type="text" name="name"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><button type="submit" class="btn btn-primary">Find</button></td>
+            <td>
+                <button type="submit" class="btn btn-primary">Find</button>
+            </td>
         </tr>
     </table>
 </form>
@@ -39,6 +38,8 @@
     <li><a href="#springUrl("/event/export")" target="_blank">export to JSON</a></li>
     <li><a href="#springUrl("/event/import")">import from JSON</a></li>
     <li><a href="#springUrl("/event/assign")">assign date and auditorium</a></li>
+    <li><a href="#springUrl("/event/assigned")">list of assigned events</a></li>
+    <li><a href="#springUrl("/event/assigned/export")" target="_blank">export assigned to JSON</a></li>
 </ul>
 
 <h2>Import</h2>
