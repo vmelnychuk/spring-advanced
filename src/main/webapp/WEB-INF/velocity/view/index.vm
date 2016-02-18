@@ -40,3 +40,8 @@
     <li><a href="#springUrl("/event/import")">import from JSON</a></li>
     <li><a href="#springUrl("/event/assign")">assign date and auditorium</a></li>
 </ul>
+
+<h2>Import</h2>
+<ul>
+    <li><a href="#springUrl("/import")">import events, users, auditoriums from JSON</a></li>
+</ul>
