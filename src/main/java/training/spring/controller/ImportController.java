@@ -15,8 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import training.spring.entity.AssignedEvent;
 import training.spring.entity.Auditorium;
 import training.spring.entity.Event;
+import training.spring.entity.Ticket;
 import training.spring.entity.User;
 import training.spring.service.AuditoriumService;
+import training.spring.service.BookingService;
 import training.spring.service.EventService;
 import training.spring.service.UserService;
 
@@ -32,6 +34,9 @@ public class ImportController {
     @Autowired
     private AuditoriumService auditoriumService;
 
+    @Autowired
+    private BookingService bookingService;
+
     @RequestMapping(value = "/import", method = RequestMethod.GET)
     public String importPage() {
         return "import";
@@ -42,11 +47,13 @@ public class ImportController {
             @RequestParam("userFile") MultipartFile userFile,
             @RequestParam("eventFile") MultipartFile eventFile,
             @RequestParam("auditoriumFile") MultipartFile auditoriumFile,
-            @RequestParam("assignedFile") MultipartFile assignedFile) {
+            @RequestParam("assignedFile") MultipartFile assignedFile,
+            @RequestParam("ticketFile") MultipartFile ticketFile) {
         List<User> users = null;
         List<Event> events = null;
         List<Auditorium> auditoriums = null;
         List<AssignedEvent> assignedEvents = null;
+        List<Ticket> tickets = null;
         
         //TODO: refactor it
         if(!userFile.isEmpty()) {
@@ -96,12 +103,25 @@ public class ImportController {
                 throw new RuntimeException("import problem", e);
             }
         }
+
+        if(!ticketFile.isEmpty()) {
+            try {
+                byte[] bytes = ticketFile.getBytes();
+                String jsonString = new String(bytes, "UTF-8");
+                ObjectMapper mapper = new ObjectMapper();
+                tickets = mapper.readValue(jsonString, new TypeReference<List<Ticket>>(){});
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("import problem", e);
+            }
+        }
         
         userService.addAll(users);
         eventService.addAll(events);
         auditoriumService.addAll(auditoriums);
         eventService.addAllAssignedEvents(assignedEvents);
-        
+        bookingService.addAll(tickets);
+
         return "redirect:/";
     }
 }

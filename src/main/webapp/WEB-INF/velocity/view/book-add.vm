@@ -1,0 +1,32 @@
+<h1>Book ticket</h1>
+#parse("/WEB-INF/velocity/fragments/_go_back.vm")
+<form method="post">
+    <table class="table table-hover">
+        <tr>
+            <th>user</th>
+            <th>event</th>
+            <th>seat</th>
+            <th>action</th>
+        </tr>
+        <tr>
+            <td>
+                <select name="user-id">
+                    #foreach ($user in ${users})
+                        <option value="${user.id}">${user.email}</option>
+                    #end
+                </select>
+            </td>
+            <td>
+                <select name="assigned-id">
+                    #foreach ($assign in ${assigned})
+                        <option value="${assign.id}">${assign.event.name} - ${assign.date} - ${assign.auditorium.name}</option>
+                    #end
+                </select>
+            </td>
+            <td><input type="text" name="seat"/></td>
+            <td>
+                <button type="submit" class="btn btn-primary">Assign</button>
+            </td>
+        </tr>
+    </table>
+</form>

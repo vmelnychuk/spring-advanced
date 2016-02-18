@@ -1,0 +1,23 @@
+<h1>Tickets list</h1>
+#parse("/WEB-INF/velocity/fragments/_go_back.vm")
+<table class="table table-hover">
+    <tr>
+        <th>id</th>
+        <th>user</th>
+        <th>event</th>
+        <th>seat</th>
+        <th>price</th>
+        <th>delete</th>
+    </tr>
+    #foreach ($ticket in ${tickets})
+        <tr>
+            <td>${ticket.id}</td>
+            <td>${ticket.user.email}</td>
+            <td>${ticket.assignedEvent.event.name}</td>
+            <td>${ticket.seat}</td>
+            <td>${ticket.price}</td>
+            <td><a href="#springUrl("/book/delete/${ticket.id}")" class="btn btn-danger">delete</a></td>
+        </tr>
+    #end
+</table>
+<a href="#springUrl("/book/add")" class="btn btn-success">Add</a>

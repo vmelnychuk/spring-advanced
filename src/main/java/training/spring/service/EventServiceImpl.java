@@ -75,6 +75,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public AssignedEvent getAssigned(Long id) {
+        return assignedEventRepository.findOne(id);
+    }
+
+    @Override
     public void addAllAssignedEvents(List<AssignedEvent> assignedEvents) {
         assignedEventRepository.save(assignedEvents);
     }

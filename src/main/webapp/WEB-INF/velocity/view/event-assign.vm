@@ -27,7 +27,7 @@
                 </select>
             </td>
             <td>
-                <button type="submit" class="btn btn-primary">Assign</button>
+                <button type="submit" class="btn btn-primary">Book</button>
             </td>
         </tr>
     </table>

@@ -18,5 +18,6 @@ public interface EventService {
     void delete(Long id);
     List<AssignedEvent> getAllAssignedEvents();
     void deleteAssigned(Long id);
+    AssignedEvent getAssigned(Long id);
     void addAllAssignedEvents(List<AssignedEvent> assignedEvents);
 }
