@@ -9,7 +9,11 @@
     <!-- Application context -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/config/application-context.xml,/WEB-INF/config/jpa-context.xml</param-value>
+        <param-value>
+            /WEB-INF/config/application-context.xml
+            /WEB-INF/config/jpa-context.xml
+            /WEB-INF/config/spring-security.xml
+        </param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -25,6 +29,26 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <!-- Spring Security -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403</location>
+    </error-page>
 
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>

@@ -1,3 +1,12 @@
+# Spring Advanced: Task 2
+
+
+### TODO:
+- refactor json import method
+- date picker for date
+
+
+
 # Spring Advanced: Task 1
 
 ## Notes:
