@@ -2,7 +2,8 @@
 
 ### TODO:
 - refactor json import method
-- date picker for date
+- UI: date picker for date
+- UI: refactor forms with bootstrap
 
 Task description:
 

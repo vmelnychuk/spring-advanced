@@ -6,7 +6,17 @@
         <ul class="nav navbar-nav">
             <li><a href="#springUrl("/book/add")">Booking</a></li>
             <li><a href="#springUrl("/event/assigned")">Events</a></li>
-            <li><a href="#springUrl("/login")">Sign In</a></li>
+            #if(${sec.userName} != "" )
+                <li>
+                    <p class="navbar-text">
+                        Welcome ${sec.userName}
+                        <a id="logout" href="#">Logout</a>
+                    </p>
+                    <form id="logout-form" action="#springUrl("/logout")" method="post"></form>
+                </li>
+            #else
+                <li><a href="#springUrl("/login")">Sign In</a></li>
+            #end
         </ul>
     </div>
 </nav>

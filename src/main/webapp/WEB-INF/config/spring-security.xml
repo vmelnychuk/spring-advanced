@@ -5,15 +5,26 @@
        xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+
     <security:http pattern="/assets/**" security="none"/>
 
     <security:http auto-config="true" use-expressions="false">
         <security:csrf disabled="true"/>
-        <security:form-login login-page="/login" login-processing-url="/login" username-parameter="login" password-parameter="password"/>
-        <security:intercept-url pattern="/event/assigned" access="ROLE_USER"/>
-        <security:intercept-url pattern="/event/**" access="ROLE_BOOKING_MANAGER"/>
-        <security:intercept-url pattern="/**" access="ROLE_ANONYMOUS"/>
+        <security:form-login login-page="/login"
+                             login-processing-url="/login"
+                             username-parameter="login"
+                             password-parameter="password"
+                             default-target-url="/book/add"
+                             authentication-failure-url="/login?error=true"/>
+
+        <security:logout logout-url="/logout" logout-success-url="/"/>
+
+        <security:intercept-url pattern="/book/*" access="ROLE_USER"/>
+        <security:intercept-url pattern="/event/*" access="ROLE_BOOKING_MANAGER"/>
+        <security:intercept-url pattern="/**" access="ROLE_ANONYMOUS, ROLE_USER"/>
     </security:http>
+
 
     <security:authentication-manager>
         <security:authentication-provider>
