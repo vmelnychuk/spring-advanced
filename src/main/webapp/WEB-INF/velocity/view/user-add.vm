@@ -1,5 +1,4 @@
 <h1>Register user</h1>
-#parse("/WEB-INF/velocity/fragments/_go_back.vm")
 <form method="post">
     #springBind("user")
     <table>

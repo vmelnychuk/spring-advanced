@@ -1,5 +1,4 @@
 <h1>Auditoriums</h1>
-#parse("/WEB-INF/velocity/fragments/_go_back.vm")
 <table class="table table-hover">
     <tr>
         <th>id</th>

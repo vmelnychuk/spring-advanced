@@ -1,5 +1,4 @@
 <h1>Import user data</h1>
-#parse("/WEB-INF/velocity/fragments/_go_back.vm")
 <form method="post" enctype="multipart/form-data">
     <table>
         <tr>

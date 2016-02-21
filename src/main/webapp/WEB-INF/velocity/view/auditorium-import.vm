@@ -1,5 +1,4 @@
 <h1>Import auditorium data</h1>
-#parse("/WEB-INF/velocity/fragments/_go_back.vm")
 <form enctype="multipart/form-data" method="post">
     <table>
         <tr>

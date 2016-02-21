@@ -1,5 +1,4 @@
 <h1>Book ticket</h1>
-#parse("/WEB-INF/velocity/fragments/_go_back.vm")
 <form method="post">
     <table class="table table-hover">
         <tr>

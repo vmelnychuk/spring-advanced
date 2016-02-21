@@ -8,9 +8,5 @@
     <title>Cinema</title>
 </head>
 <body>
-<div class="container">
-<div>
-    <a href="#springUrl("/")">
-        <img class="logo" src="#springUrl("/assets/img/logo.jpg")">
-    </a>
-</div>
+    #parse("/WEB-INF/velocity/fragments/_nav_bar.vm")
+    <div class="container">

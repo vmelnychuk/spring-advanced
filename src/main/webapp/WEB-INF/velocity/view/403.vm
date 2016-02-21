@@ -1,3 +1,2 @@
 <h1>403</h1>
 <h2>Forbidden</h2>
-#parse("/WEB-INF/velocity/fragments/_go_back.vm")
