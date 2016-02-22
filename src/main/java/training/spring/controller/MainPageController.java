@@ -30,4 +30,9 @@ public class MainPageController {
     public String forbidden() {
         return "403";
     }
+    
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String adminPanel() {
+        return "admin-panel";
+    }
 }
