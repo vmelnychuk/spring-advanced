@@ -11,9 +11,29 @@ public class VelocitySpringSecurity {
             if(object instanceof UserDetails) {
                 userName = ((UserDetails) object).getUsername();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignore) {
         }
         return userName;
+    }
+
+    public static boolean isUser() {
+        return checkRole("ROLE_USER");
+    }
+
+    public static boolean isManager() {
+        return checkRole("ROLE_MANAGER");
+    }
+
+    public static boolean isAdmin() {
+        return checkRole("ROLE_ADMIN");
+    }
+
+    private static boolean checkRole(String roleName) {
+        boolean result = false;
+        try {
+            result = SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(roleName);
+        } catch (Exception ignore) {
+        }
+        return result;
     }
 }

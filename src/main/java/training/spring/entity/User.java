@@ -24,6 +24,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "role")
+    private String role;
+
     public User() {}
 
     public Long getId() {
@@ -58,4 +61,11 @@ public class User {
         this.email = email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

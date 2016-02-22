@@ -4,6 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -120,5 +124,42 @@ public class UserController {
             data.put(user.getName(), user.getEmail());
         }
         return new ModelAndView("PdfReport", "data", data);
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profilePage(Model model) {
+        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getUserByEmail(userEmail);
+        model.addAttribute("user", user);
+        return "user-profile";
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    public String profileEdit(@ModelAttribute("user")User user) {
+        userService.save(user);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String goSignup(Model model) {
+        model.addAttribute("user", new User());
+        return "user-signup";
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signup(@ModelAttribute("user")User user) {
+        user.setRole("ROLE_USER");
+        userService.register(user);
+
+        org.springframework.security.core.userdetails.User springUser =
+                new org.springframework.security.core.userdetails.User(
+                        user.getEmail(),
+                        user.getPassword(),
+                        AuthorityUtils.createAuthorityList(user.getRole()));
+        Authentication auth = new UsernamePasswordAuthenticationToken(springUser,
+                user.getPassword(),
+                AuthorityUtils.createAuthorityList(user.getRole()));
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        return "redirect:/";
     }
 }

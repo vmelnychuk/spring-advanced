@@ -1,6 +1,8 @@
 package training.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.SecurityContextProvider;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,10 +45,10 @@ public class BookingController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(@RequestParam("user-id") Long userId,
-                      @RequestParam("assigned-id") Long assignedId,
+    public String add(@RequestParam("assigned-id") Long assignedId,
                       @RequestParam("seat") int seat) {
-        User user = userService.getById(userId);
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getUserByEmail(email);
         AssignedEvent assignedEvent = eventService.getAssigned(assignedId);
         Ticket ticket = new Ticket();
         ticket.setAssignedEvent(assignedEvent);

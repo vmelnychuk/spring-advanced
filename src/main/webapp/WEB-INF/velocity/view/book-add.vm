@@ -2,19 +2,11 @@
 <form method="post">
     <table class="table table-hover">
         <tr>
-            <th>user</th>
             <th>event</th>
             <th>seat</th>
             <th>action</th>
         </tr>
         <tr>
-            <td>
-                <select name="user-id">
-                    #foreach ($user in ${users})
-                        <option value="${user.id}">${user.email}</option>
-                    #end
-                </select>
-            </td>
             <td>
                 <select name="assigned-id">
                     #foreach ($assign in ${assigned})

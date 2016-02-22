@@ -7,18 +7,20 @@
             <li><a href="#springUrl("/book/add")">Booking</a></li>
             <li><a href="#springUrl("/event/assigned")">Events</a></li>
             #if(${sec.userName} != "")
-                #if(${sec.userName} == "admin")
-                    <li>    <a href="#springUrl("/admin")">Admin Panel</a></li>
+                #if(${sec.isAdmin})
+                    <li><a href="#springUrl("/admin")">Admin Panel</a></li>
                 #end
+                #if(${sec.isManager})
+                    <li><a href="#springUrl("/event")">Event Managment</a></li>
+                #end
+                <li><a href="#springUrl("/user/profile")">Profile: ${sec.userName}</a></li>
                 <li>
-                    <p class="navbar-text">
-                        Welcome ${sec.userName}
-                        <a id="logout" href="#">Logout</a>
-                    </p>
+                    <a id="logout" href="#">Logout</a>
                     <form id="logout-form" action="#springUrl("/logout")" method="post"></form>
                 </li>
             #else
                 <li><a href="#springUrl("/login")">Sign In</a></li>
+                <li><a href="#springUrl("/user/signup")">Sign Up</a></li>
             #end
         </ul>
     </div>

@@ -17,10 +17,10 @@ Task description:
 3. Implement
     +form-based login via security namespace, 
     +add custom login page,
-    configure DAOAuthenticationProvider
-    and UserDetailsService to load user data from database.
+    +configure DAOAuthenticationProvider
+    +and UserDetailsService to load user data from database.
     +Configure logout filter.
-4. Configure Remember-Me authentication.
+4. +Configure Remember-Me authentication.
 5. Implement password encoding during authentication.
 
 

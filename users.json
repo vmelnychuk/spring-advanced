@@ -1,1 +1,1 @@
-[{"name":"Joe","id":1,"password":"joe","email":"joe@mail.com"},{"name":"mike","id":2,"password":"password","email":"mike@mail.gov"},{"name":"Kelly","id":3,"password":"pass","email":"k@gmail.com"}]
+[{"name":"admin","id":1,"role":"ROLE_ADMIN","email":"admin","password":"admin"},{"name":"user","id":2,"role":"ROLE_USER","email":"user","password":"user"},{"name":"manager","id":3,"role":"ROLE_MANAGER","email":"manager","password":"manager"},{"name":"several","id":4,"role":"ROLE_USER,ROLE_MANAGER","email":"several","password":"several"}]
