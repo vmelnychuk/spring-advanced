@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -149,6 +150,9 @@ public class UserController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signup(@ModelAttribute("user")User user) {
         user.setRole("ROLE_USER");
+        ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
+        String encodedPassword = encoder.encodePassword(user.getPassword(), null);
+        user.setPassword(encodedPassword);
         userService.register(user);
 
         org.springframework.security.core.userdetails.User springUser =

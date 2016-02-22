@@ -38,7 +38,10 @@
 
 
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="customUserDetailsService"/>
+        <security:authentication-provider user-service-ref="customUserDetailsService">
+            <security:password-encoder hash="sha-256"/>
+        </security:authentication-provider>
+
     </security:authentication-manager>
 
 </beans>
