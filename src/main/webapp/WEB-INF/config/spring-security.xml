@@ -25,7 +25,9 @@
 
         <security:logout logout-url="/logout" logout-success-url="/"/>
 
-        <security:intercept-url pattern="/book/*" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/book/add" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/book/delete/*" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/book/*" access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/event/*" access="hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/manager" access="hasRole('ROLE_MANAGER')"/>
         <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>

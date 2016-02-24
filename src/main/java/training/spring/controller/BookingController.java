@@ -1,7 +1,10 @@
 package training.spring.controller;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.SecurityContextProvider;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import training.spring.entity.AssignedEvent;
 import training.spring.entity.Ticket;
 import training.spring.entity.User;
 import training.spring.service.BookingService;
 import training.spring.service.EventService;
 import training.spring.service.UserService;
-
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/book")
@@ -56,7 +56,7 @@ public class BookingController {
         ticket.setSeat(seat);
         ticket.setPrice(assignedEvent.getEvent().getPrice());
         bookingService.bookTicket(ticket);
-        return "redirect:list";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/list")
@@ -69,7 +69,7 @@ public class BookingController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String assignedDelete(@PathVariable("id") Long id) {
         bookingService.delete(id);
-        return "redirect:/book/list";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/export", method = RequestMethod.GET)

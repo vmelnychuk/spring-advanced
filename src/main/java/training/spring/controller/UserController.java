@@ -1,11 +1,16 @@
 package training.spring.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,15 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import training.spring.entity.User;
-import training.spring.service.UserService;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import training.spring.entity.Ticket;
+import training.spring.entity.User;
+import training.spring.service.BookingService;
+import training.spring.service.UserService;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -36,6 +37,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private BookingService bookingService;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createNew(Model model) {
@@ -138,6 +142,8 @@ public class UserController {
     public String profilePage(Model model) {
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(userEmail);
+        List<Ticket> tickets = bookingService.getTicketsByUser(user);
+        model.addAttribute("tickets", tickets);
         model.addAttribute("user", user);
         return "user-profile";
     }
