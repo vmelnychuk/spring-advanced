@@ -9,6 +9,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,6 +45,9 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@ModelAttribute("user")User user) {
+        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
+        String encodedPassword = encoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         userService.register(user);
         return "redirect:list";
     }
@@ -92,6 +96,9 @@ public class UserController {
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public String edit(@ModelAttribute("user")User user) {
+        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
+        String encodedPassword = encoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         userService.save(user);
         return "redirect:/user/list";
     }
@@ -137,6 +144,9 @@ public class UserController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String profileEdit(@ModelAttribute("user")User user) {
+        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
+        String encodedPassword = encoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         userService.save(user);
         return "redirect:/";
     }
@@ -150,8 +160,8 @@ public class UserController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signup(@ModelAttribute("user")User user) {
         user.setRole("ROLE_USER");
-        ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
-        String encodedPassword = encoder.encodePassword(user.getPassword(), null);
+        StandardPasswordEncoder encoder = new StandardPasswordEncoder();
+        String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userService.register(user);
 

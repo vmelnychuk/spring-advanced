@@ -28,7 +28,9 @@
         <security:intercept-url pattern="/book/*" access="ROLE_USER, ROLE_ANONYMOUS"/>
         <security:intercept-url pattern="/event/*" access="ROLE_MANAGER, ROLE_ADMIN, ROLE_ANONYMOUS"/>
         <security:intercept-url pattern="/admin" access="ROLE_ADMIN, ROLE_ANONYMOUS"/>
-        <security:intercept-url pattern="/**" access="ROLE_ANONYMOUS, ROLE_USER"/>
+        <!-- Import panel -->
+        <security:intercept-url pattern="/import" access="ROLE_ANONYMOUS, ROLE_USER, ROLE_MANAGER, ROLE_ADMIN"/>
+        <security:intercept-url pattern="/**" access="ROLE_ANONYMOUS, ROLE_USER, ROLE_MANAGER, ROLE_ADMIN"/>
 
         <security:remember-me key="rememberMe"/>
 
@@ -39,9 +41,9 @@
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="customUserDetailsService">
-            <security:password-encoder hash="sha-256"/>
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
-
     </security:authentication-manager>
 
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
 </beans>
