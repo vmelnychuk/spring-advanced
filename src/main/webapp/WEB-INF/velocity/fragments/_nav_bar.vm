@@ -7,8 +7,12 @@
             <li><a href="#springUrl("/book/add")">Booking</a></li>
             <li><a href="#springUrl("/event/assigned")">Events</a></li>
             #if(${sec.userName} != "")
-                <li><a href="#springUrl("/admin")">Admin Panel</a></li>
-                <li><a href="#springUrl("/manage")">Manager Panel</a></li>
+                #if($sec.isAdmin())
+                    <li><a href="#springUrl("/admin")">Admin Panel</a></li>
+                #end
+                #if($sec.isManager())
+                    <li><a href="#springUrl("/manage")">Manager Panel</a></li>
+                #end
                 <li><a href="#springUrl("/user/profile")">Profile: ${sec.userName}</a></li>
                 <li>
                     <a id="logout" href="#">Logout</a>

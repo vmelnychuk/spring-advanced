@@ -29,7 +29,6 @@ public class VelocitySpringSecurity {
         return checkRole("ROLE_ADMIN");
     }
 
-    //TODO: check this method
     private static boolean checkRole(String roleName) {
         boolean result = false;
         try {
