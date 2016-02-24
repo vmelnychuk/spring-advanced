@@ -7,6 +7,12 @@ Notes:
     - user/user
     - manager/manager
     - several/several
+- import data for users and other entities:
+    - auditoriums.json
+    - events.json
+    - users.json
+    - assigned-events.json
+    - tickets.json
 
 Task description:
 
