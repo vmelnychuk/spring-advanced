@@ -1,9 +1,12 @@
 # Spring Advanced: Task 2
 
-### TODO:
-- refactor json import method
-- UI: date picker for date
-- UI: refactor forms with bootstrap
+Notes:
+- use MySQL, check db.properties for details
+- credentials from users.json file username == password
+    - admin/admin
+    - user/user
+    - manager/manager
+    - several/several
 
 Task description:
 
@@ -21,7 +24,7 @@ Task description:
     +and UserDetailsService to load user data from database.
     +Configure logout filter.
 4. +Configure Remember-Me authentication.
-5. Implement password encoding during authentication.
+5. +Implement password encoding during authentication.
 
 
 # Spring Advanced: Task 1

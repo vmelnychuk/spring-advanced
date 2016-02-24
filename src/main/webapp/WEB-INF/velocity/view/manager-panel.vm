@@ -1,0 +1,32 @@
+<h1>Cinema Manager Panel</h1>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Auditoriums</h2>
+        <ul>
+            <li><a href="#springUrl("/auditorium/list")">list of auditoriums</a></li>
+            <li><a href="#springUrl("/auditorium/add")">add auditorium</a></li>
+            <li><a href="#springUrl("/auditorium/export")" target="_blank">export to JSON</a></li>
+            <li><a href="#springUrl("/auditorium/import")">import from JSON</a></li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Events</h2>
+        <ul>
+            <li><a href="#springUrl("/event/list")">list of events</a></li>
+            <li><a href="#springUrl("/event/add")">add event</a></li>
+            <li><a href="#springUrl("/event/export")" target="_blank">export to JSON</a></li>
+            <li><a href="#springUrl("/event/import")">import from JSON</a></li>
+            <li><a href="#springUrl("/event/assign")">assign date and auditorium</a></li>
+            <li><a href="#springUrl("/event/assigned")">list of assigned events</a></li>
+            <li><a href="#springUrl("/event/assigned/export")" target="_blank">export assigned to JSON</a></li>
+        </ul>
+
+        <h2>Booking</h2>
+        <ul>
+            <li><a href="#springUrl("/book/list")">list of tickets</a></li>
+            <li><a href="#springUrl("/book/add")">book ticket</a></li>
+            <li><a href="#springUrl("/book/export")" target="_blank">export to JSON</a></li>
+            <li><a href="#springUrl("/book/pdf")" target="_blank">export to PDF</a></li>
+        </ul>
+    </div>
+</div>

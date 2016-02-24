@@ -35,4 +35,9 @@ public class MainPageController {
     public String adminPanel() {
         return "admin-panel";
     }
+
+    @RequestMapping(value = "/manage", method = RequestMethod.GET)
+    public String managerPanel() {
+        return "manager-panel";
+    }
 }

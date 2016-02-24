@@ -1,5 +1,6 @@
 package training.spring.security.utils;
 
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -28,10 +29,11 @@ public class VelocitySpringSecurity {
         return checkRole("ROLE_ADMIN");
     }
 
+    //TODO: check this method
     private static boolean checkRole(String roleName) {
         boolean result = false;
         try {
-            result = SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(roleName);
+            result = SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(AuthorityUtils.createAuthorityList(roleName).get(0));
         } catch (Exception ignore) {
         }
         return result;
