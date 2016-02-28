@@ -1,7 +1,5 @@
 package training.spring.controller;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +16,8 @@ import training.spring.entity.Auditorium;
 import training.spring.entity.Event;
 import training.spring.service.AuditoriumService;
 import training.spring.service.EventService;
+import training.spring.utils.ImportParser;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -70,15 +68,7 @@ public class EventController {
     public String importJon(@RequestParam("file") MultipartFile file) {
         List<Event> events = null;
         if(!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                String jsonString = new String(bytes, "UTF-8");
-                ObjectMapper mapper = new ObjectMapper();
-                events = mapper.readValue(jsonString, new TypeReference<List<Event>>(){});
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("import problem", e);
-            }
+            events = ImportParser.parseJson(file, Event.class);
         }
         eventService.addAll(events);
         return "redirect:list";

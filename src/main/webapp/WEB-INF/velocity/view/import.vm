@@ -1,30 +1,28 @@
-<h1>Import data</h1>
-<form method="post" enctype="multipart/form-data">
-    <table>
-        <tr>
-            <td>Events file</td>
-            <td><input type="file" name="eventFile"/></td>
-        </tr>
-        <tr>
-            <td>Users file</td>
-            <td><input type="file" name="userFile"/></td>
-        </tr>
-        <tr>
-            <td>Auditoriums file</td>
-            <td><input type="file" name="auditoriumFile"/></td>
-        </tr>
-        <tr>
-            <td>Assigned events file</td>
-            <td><input type="file" name="assignedFile"/></td>
-        </tr>
-        <tr>
-            <td>Tickets file</td>
-            <td><input type="file" name="ticketFile"/></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <button type="submit" class="btn btn-primary">Import</button>
-            </td>
-        </tr>
-    </table>
-</form>
+<div class="row">
+    <div class="col-md-6">
+        <h1>Import data</h1>
+        <form method="post" enctype="multipart/form-data" class="form-horizontal">
+            <div class="form-group">
+                <label for="make">Events file</label>
+                <input type="file" name="eventFile"/>
+            </div>
+            <div class="form-group">
+                <label for="make">Users file</label>
+                <input type="file" name="userFile"/>
+            </div>
+            <div class="form-group">
+                <label for="make">Auditoriums file</label>
+                <input type="file" name="auditoriumFile"/>
+            </div>
+            <div class="form-group">
+                <label for="make">Assigned events file</label>
+                <input type="file" name="assignedFile"/>
+            </div>
+            <div class="form-group">
+                <label for="make">Tickets file</label>
+                <input type="file" name="ticketFile"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Import</button>
+        </form>
+    </div>
+</div>

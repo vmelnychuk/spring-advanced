@@ -1,11 +1,8 @@
 package training.spring.controller;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +13,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import training.spring.entity.Auditorium;
 import training.spring.service.AuditoriumService;
+import training.spring.utils.ImportParser;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -66,15 +60,7 @@ public class AuditoriumController {
     public String importJon(@RequestParam("file") MultipartFile file) {
         List<Auditorium> auditoriums = null;
         if(!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                String jsonString = new String(bytes, "UTF-8");
-                ObjectMapper mapper = new ObjectMapper();
-                auditoriums = mapper.readValue(jsonString, new TypeReference<List<Auditorium>>(){});
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("import problem", e);
-            }
+            auditoriums = ImportParser.parseJson(file, Auditorium.class);
         }
         auditoriumService.addAll(auditoriums);
         return "redirect:list";

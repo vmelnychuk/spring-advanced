@@ -1,14 +1,11 @@
 package training.spring.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,6 +27,7 @@ import training.spring.entity.Ticket;
 import training.spring.entity.User;
 import training.spring.service.BookingService;
 import training.spring.service.UserService;
+import training.spring.utils.ImportParser;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -77,15 +75,7 @@ public class UserController {
     public String importJon(@RequestParam("file") MultipartFile file) {
         List<User> users = null;
         if(!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                String jsonString = new String(bytes, "UTF-8");
-                ObjectMapper mapper = new ObjectMapper();
-                users = mapper.readValue(jsonString, new TypeReference<List<User>>(){});
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("import problem", e);
-            }
+            users = ImportParser.parseJson(file, User.class);
         }
         userService.addAll(users);
         return "redirect:list";

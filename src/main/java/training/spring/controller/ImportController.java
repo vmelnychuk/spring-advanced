@@ -1,10 +1,7 @@
 package training.spring.controller;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +18,7 @@ import training.spring.service.AuditoriumService;
 import training.spring.service.BookingService;
 import training.spring.service.EventService;
 import training.spring.service.UserService;
+import training.spring.utils.ImportParser;
 
 @Controller
 public class ImportController {
@@ -43,7 +41,7 @@ public class ImportController {
     }
 
     @RequestMapping(value = "/import", method = RequestMethod.POST)
-    public String importJon(
+    public String importJson(
             @RequestParam("userFile") MultipartFile userFile,
             @RequestParam("eventFile") MultipartFile eventFile,
             @RequestParam("auditoriumFile") MultipartFile auditoriumFile,
@@ -54,66 +52,25 @@ public class ImportController {
         List<Auditorium> auditoriums = null;
         List<AssignedEvent> assignedEvents = null;
         List<Ticket> tickets = null;
-        
-        //TODO: refactor it
+
         if(!userFile.isEmpty()) {
-            try {
-                byte[] bytes = userFile.getBytes();
-                String jsonString = new String(bytes, "UTF-8");
-                ObjectMapper mapper = new ObjectMapper();
-                users = mapper.readValue(jsonString, new TypeReference<List<User>>(){});
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("import problem", e);
-            }
+            users = ImportParser.parseJson(userFile, User.class);
         }
         
         if(!eventFile.isEmpty()) {
-            try {
-                byte[] bytes = eventFile.getBytes();
-                String jsonString = new String(bytes, "UTF-8");
-                ObjectMapper mapper = new ObjectMapper();
-                events = mapper.readValue(jsonString, new TypeReference<List<Event>>(){});
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("import problem", e);
-            }
+            events = ImportParser.parseJson(eventFile, Event.class);
         }
         
         if(!auditoriumFile.isEmpty()) {
-            try {
-                byte[] bytes = auditoriumFile.getBytes();
-                String jsonString = new String(bytes, "UTF-8");
-                ObjectMapper mapper = new ObjectMapper();
-                auditoriums = mapper.readValue(jsonString, new TypeReference<List<Auditorium>>(){});
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("import problem", e);
-            }
+            auditoriums = ImportParser.parseJson(auditoriumFile, Auditorium.class);
         }
 
         if(!assignedFile.isEmpty()) {
-            try {
-                byte[] bytes = assignedFile.getBytes();
-                String jsonString = new String(bytes, "UTF-8");
-                ObjectMapper mapper = new ObjectMapper();
-                assignedEvents = mapper.readValue(jsonString, new TypeReference<List<AssignedEvent>>(){});
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("import problem", e);
-            }
+           assignedEvents = ImportParser.parseJson(assignedFile, AssignedEvent.class);
         }
 
         if(!ticketFile.isEmpty()) {
-            try {
-                byte[] bytes = ticketFile.getBytes();
-                String jsonString = new String(bytes, "UTF-8");
-                ObjectMapper mapper = new ObjectMapper();
-                tickets = mapper.readValue(jsonString, new TypeReference<List<Ticket>>(){});
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("import problem", e);
-            }
+           tickets = ImportParser.parseJson(ticketFile, Ticket.class);
         }
         
         userService.addAll(users);
