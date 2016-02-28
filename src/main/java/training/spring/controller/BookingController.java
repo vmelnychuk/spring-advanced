@@ -21,6 +21,7 @@ import training.spring.entity.Ticket;
 import training.spring.entity.User;
 import training.spring.service.BookingService;
 import training.spring.service.EventService;
+import training.spring.service.UserAccountService;
 import training.spring.service.UserService;
 
 @Controller
@@ -35,6 +36,9 @@ public class BookingController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserAccountService userAccountService;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createNew(Model model){

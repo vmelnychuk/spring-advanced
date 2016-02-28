@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import training.spring.entity.Ticket;
 import training.spring.entity.User;
+import training.spring.entity.UserAccount;
 import training.spring.repository.TicketRepository;
 
 import java.util.ArrayList;
