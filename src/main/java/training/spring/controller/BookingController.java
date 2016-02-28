@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +46,7 @@ public class BookingController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PreAuthorize("isAuthenticated()")
     public String add(@RequestParam("assigned-id") Long assignedId,
                       @RequestParam("seat") int seat) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -67,6 +69,7 @@ public class BookingController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
     public String assignedDelete(@PathVariable("id") Long id) {
         bookingService.delete(id);
         return "redirect:/";

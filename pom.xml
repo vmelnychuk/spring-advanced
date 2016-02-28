@@ -38,6 +38,7 @@
         <velocity-tools.version>2.0</velocity-tools.version>
         <h2.version>1.4.187</h2.version>
         <jackson-databind.version>2.7.2</jackson-databind.version>
+        <jsr250-api.version>1.0</jsr250-api.version>
     </properties>
 
     <build>
@@ -99,6 +100,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>${jsr250-api.version}</version>
         </dependency>
 
         <!-- AspectJ -->

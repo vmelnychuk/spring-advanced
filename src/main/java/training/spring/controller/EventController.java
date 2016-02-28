@@ -18,6 +18,7 @@ import training.spring.service.AuditoriumService;
 import training.spring.service.EventService;
 import training.spring.utils.ImportParser;
 
+import javax.annotation.security.RolesAllowed;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,6 +50,7 @@ public class EventController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RolesAllowed("ROLE_ADMIN")
     public String add(@ModelAttribute("event")Event event) {
         eventService.save(event);
         return "redirect:list";

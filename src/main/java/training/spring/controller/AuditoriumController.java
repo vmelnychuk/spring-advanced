@@ -1,6 +1,7 @@
 package training.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,6 +42,7 @@ public class AuditoriumController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     public String update(@Valid @ModelAttribute ("auditorium")Auditorium auditorium) {
         auditoriumService.add(auditorium);
         return "redirect:list";
