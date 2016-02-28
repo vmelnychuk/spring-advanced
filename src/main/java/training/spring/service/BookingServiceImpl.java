@@ -21,6 +21,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public Ticket get(Long id) {
+        return ticketRepository.findOne(id);
+    }
+
+    @Override
     public List<Ticket> getAll() {
         return ticketRepository.findAll();
     }
@@ -33,6 +38,22 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void addAll(List<Ticket> tickets) {
         ticketRepository.save(tickets);
+    }
+
+    @Override
+    public String printTicket(Ticket ticket) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\nWhat: ")
+                .append(ticket.getAssignedEvent().getEvent().getName())
+                .append("\nWhen: ")
+                .append(ticket.getAssignedEvent().getDate())
+                .append("\nWhere: ")
+                .append(ticket.getAssignedEvent().getAuditorium().getName())
+                .append("\nSeat: ")
+                .append(ticket.getSeat())
+                .append("\nPrice: ")
+                .append(ticket.getPrice());
+        return stringBuilder.toString();
     }
 
     @Override

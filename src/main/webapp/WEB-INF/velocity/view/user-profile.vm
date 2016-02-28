@@ -34,6 +34,7 @@
         <th>seat</th>
         <th>price</th>
         <th>delete</th>
+        <th>print</th>
     </tr>
     #foreach ($ticket in ${tickets})
         <tr>
@@ -43,6 +44,7 @@
             <td>${ticket.seat}</td>
             <td>${ticket.price}</td>
             <td><a href="#springUrl("/book/delete/${ticket.id}")" class="btn btn-danger">delete</a></td>
+            <td><a href="#springUrl("/book/print/${ticket.id}")" class="btn btn-success" target="_blank">print</a></td>
         </tr>
     #end
 </table>

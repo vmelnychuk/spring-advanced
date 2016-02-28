@@ -72,6 +72,15 @@ public class BookingController {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "/print/{id}", method = RequestMethod.GET)
+    public ModelAndView print(@PathVariable("id") Long id) {
+        Map<String,String> data = new LinkedHashMap<String,String>();
+        Ticket ticket = bookingService.get(id);
+        data.put("id", "ticket");
+        data.put(id.toString(), bookingService.printTicket(ticket));
+        return new ModelAndView("PdfReport", "data", data);
+    }
+
     @RequestMapping(value = "/export", method = RequestMethod.GET)
     public @ResponseBody
     List<Ticket> export() {
