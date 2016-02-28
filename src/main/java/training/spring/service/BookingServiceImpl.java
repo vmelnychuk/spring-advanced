@@ -37,13 +37,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Ticket> getTicketsByUser(User user) {
-        List<Ticket> allTickets = ticketRepository.findAll();
-        List<Ticket> tickets = new ArrayList<Ticket>();
-        for(Ticket ticket : allTickets) {
-            if(ticket.getUser().getEmail().equals(user.getEmail())) {
-                tickets.add(ticket);
-            }
-        }
+        List<Ticket> tickets = ticketRepository.findByUser(user);
         return tickets;
     }
 }
