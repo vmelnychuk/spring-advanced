@@ -25,7 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import training.spring.entity.Ticket;
 import training.spring.entity.User;
+import training.spring.entity.UserAccount;
 import training.spring.service.BookingService;
+import training.spring.service.UserAccountService;
 import training.spring.service.UserService;
 import training.spring.utils.ImportParser;
 
@@ -38,6 +40,9 @@ public class UserController {
     
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private UserAccountService userAccountService;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createNew(Model model) {
@@ -133,8 +138,10 @@ public class UserController {
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByEmail(userEmail);
         List<Ticket> tickets = bookingService.getTicketsByUser(user);
+        UserAccount userAccount = userAccountService.get(user);
         model.addAttribute("tickets", tickets);
         model.addAttribute("user", user);
+        model.addAttribute("userAccount", userAccount);
         return "user-profile";
     }
 
@@ -150,16 +157,20 @@ public class UserController {
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String goSignup(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("userAccount", new UserAccount());
         return "user-signup";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signup(@ModelAttribute("user")User user) {
+    public String signup(@ModelAttribute("user")User user,
+                         @ModelAttribute("userAccount")UserAccount userAccount) {
         user.setRole("ROLE_USER");
         StandardPasswordEncoder encoder = new StandardPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userService.register(user);
+        userAccount.setUser(user);
+        userAccountService.create(userAccount);
 
         org.springframework.security.core.userdetails.User springUser =
                 new org.springframework.security.core.userdetails.User(

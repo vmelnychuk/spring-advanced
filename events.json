@@ -1,1 +1,17 @@
-[{"name":"The Terminator","id":1,"price":100},{"name":"Interstellar","id":2,"price":200},{"name":"Inception","id":3,"price":250}]
+[
+  {
+    "name": "The Terminator",
+    "id": 1,
+    "price": 100
+  },
+  {
+    "name": "Interstellar",
+    "id": 2,
+    "price": 200
+  },
+  {
+    "name": "Inception",
+    "id": 3,
+    "price": 250
+  }
+]

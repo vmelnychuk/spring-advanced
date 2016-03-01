@@ -37,9 +37,6 @@ public class BookingController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserAccountService userAccountService;
-
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String createNew(Model model){
         List<User> users = userService.getAll();

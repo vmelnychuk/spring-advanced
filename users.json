@@ -1,1 +1,23 @@
-[{"name":"admin","id":1,"role":"ROLE_ADMIN","password":"b1ac413ec088da2d0643688159ae2e2e7abec4af88d2f166a0aa8ad667fbf7046c80aa49037407a7","email":"admin"},{"name":"user","id":2,"role":"ROLE_USER","password":"e789557ad7c48da1293f1ac50f4cc58b0fdac38439a1cfe6915d83395119105d37dea3651f4bf66a","email":"user"},{"name":"manager","id":3,"role":"ROLE_MANAGER","password":"9d54e683c9254fe80a7997dc744c8eb007dfd922895bc837219a36fa6df49ddc474695cdbed08dc7","email":"manager"},{"name":"several","id":4,"role":"ROLE_USER,ROLE_MANAGER","password":"ec3c71b23205ff28ae689457263c1b11fa22c96706d1c67b5d3a88945f4848902a67a9ed8c92b925","email":"several"}]
+[
+  {
+    "name": "admin",
+    "id": 1,
+    "role": "ROLE_ADMIN",
+    "password": "b1ac413ec088da2d0643688159ae2e2e7abec4af88d2f166a0aa8ad667fbf7046c80aa49037407a7",
+    "email": "admin"
+  },
+  {
+    "name": "manager",
+    "id": 2,
+    "role": "ROLE_MANAGER",
+    "password": "9d54e683c9254fe80a7997dc744c8eb007dfd922895bc837219a36fa6df49ddc474695cdbed08dc7",
+    "email": "manager"
+  },
+  {
+    "name": "several",
+    "id": 3,
+    "role": "ROLE_USER,ROLE_MANAGER",
+    "password": "ec3c71b23205ff28ae689457263c1b11fa22c96706d1c67b5d3a88945f4848902a67a9ed8c92b925",
+    "email": "several"
+  }
+]

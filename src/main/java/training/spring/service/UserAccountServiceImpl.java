@@ -2,13 +2,16 @@ package training.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import training.spring.entity.User;
 import training.spring.entity.UserAccount;
 import training.spring.repository.UserAccountRepository;
 
+
 import java.util.List;
 
 @Service("userAccountService")
+@Transactional
 public class UserAccountServiceImpl implements UserAccountService {
     @Autowired
     private UserAccountRepository userAccountRepository;
@@ -19,7 +22,12 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public UserAccount save(UserAccount userAccount) {
+    public UserAccount create(UserAccount userAccount) {
+        return userAccountRepository.save(userAccount);
+    }
+
+    @Override
+    public UserAccount update(UserAccount userAccount) {
         return userAccountRepository.save(userAccount);
     }
 
@@ -44,5 +52,23 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     public Long check(UserAccount userAccount) {
         return userAccount.getMoney();
+    }
+
+    @Override
+    public void delete(Long id) {
+        userAccountRepository.delete(id);
+    }
+
+    @Override
+    public UserAccount getById(Long id) {
+        return userAccountRepository.findOne(id);
+    }
+
+    @Override
+    public void deposit(UserAccount userAccount, int ammount) {
+        Long currentBalance = userAccount.getMoney();
+        currentBalance += ammount;
+        userAccount.setMoney(currentBalance);
+        userAccountRepository.save(userAccount);
     }
 }

@@ -16,8 +16,13 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private TicketRepository ticketRepository;
 
+    @Autowired
+    private UserAccountService userAccountService;
+
     @Override
     public void bookTicket(Ticket ticket) {
+        UserAccount userAccount = userAccountService.get(ticket.getUser());
+        userAccountService.withdraw(userAccount, ticket.getPrice());
         ticketRepository.save(ticket);
     }
 
@@ -33,6 +38,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void delete(Long id) {
+        Ticket ticket = ticketRepository.findOne(id);
+        UserAccount userAccount = userAccountService.get(ticket.getUser());
+        userAccountService.deposit(userAccount, ticket.getPrice());
         ticketRepository.delete(id);
     }
 

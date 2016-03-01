@@ -3,6 +3,7 @@
         <h1>Profile</h1>
         <form method="post">
             #springBind("user")
+            #springBind("userAccount")
             <div class="form-group">
                 <label for="make">Full Name</label>
                 <input name="name" id="name" value="${user.name}" class="form-control" />
@@ -18,6 +19,11 @@
             <div class="form-group">
                 <label for="make">Role</label>
                 <input name="role" id="role" value="${user.role}" readonly class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="make">Account</label>
+                <input name="money" id="money" value="${userAccount.money}" readonly class="form-control" />
+                <a href="#springUrl("/account/edit/${userAccount.id}")" class="btn btn-warning">Account Edit</a>
             </div>
             <input type="hidden" name="id" value="${user.id}">
             <button type="submit" class="btn btn-primary">Save</button>

@@ -1,0 +1,20 @@
+<h1>User list</h1>
+<table class="table table-hover">
+    <tr>
+        <th>id</th>
+        <th>user</th>
+        <th>money</th>
+        <th>edit</th>
+        <th>delete</th>
+    </tr>
+    #foreach ($account in ${accounts})
+        <tr>
+            <td>${account.id}</td>
+            <td>${account.user.email}</td>
+            <td>${account.money}</td>
+            <td><a href="#springUrl("/account/edit/${account.id}")" class="btn btn-warning">edit</a></td>
+            <td><a href="#springUrl("/account/delete/${account.id}")" class="btn btn-danger">delete</a></td>
+        </tr>
+    #end
+</table>
+<a href="#springUrl("/account/export")" class="btn btn-info" target="_blank">Export</a>

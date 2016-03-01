@@ -3,6 +3,7 @@
         <h1>Sign Up</h1>
         <form method="post">
             #springBind("user")
+            #springBind("userAccount")
             <div class="form-group">
                 <label for="make">Full Name</label>
                 <input name="name" id="name" class="form-control" />
@@ -14,6 +15,10 @@
             <div class="form-group">
                 <label for="make">Password</label>
                 <input name="password" type="password" id="password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="make">Account money</label>
+                <input name="money" id="money" class="form-control" />
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
         </form>
