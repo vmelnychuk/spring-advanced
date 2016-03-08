@@ -1,14 +1,6 @@
 package training.spring.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user_account")
@@ -18,12 +10,12 @@ public class UserAccount {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @Column(name = "money")
-    private Long money;
+    @Column(name = "amount")
+    private Long amount;
 
     public UserAccount() {
     }
@@ -44,11 +36,11 @@ public class UserAccount {
         this.user = user;
     }
 
-    public Long getMoney() {
-        return money;
+    public Long getAmount() {
+        return amount;
     }
 
-    public void setMoney(Long money) {
-        this.money = money;
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 }

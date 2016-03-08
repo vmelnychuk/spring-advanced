@@ -1,13 +1,6 @@
 package training.spring.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ticket")
@@ -16,12 +9,15 @@ public class Ticket {
     @Column(name = "id")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "assigned_id", referencedColumnName = "id")
     private AssignedEvent assignedEvent;
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
     private int seat;
     private int price;
     

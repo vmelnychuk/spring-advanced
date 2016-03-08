@@ -1,28 +1,23 @@
 package training.spring.controller;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import training.spring.entity.AssignedEvent;
 import training.spring.entity.Ticket;
 import training.spring.entity.User;
 import training.spring.service.BookingService;
 import training.spring.service.EventService;
-import training.spring.service.UserAccountService;
 import training.spring.service.UserService;
+import training.spring.service.exception.NotEnoughMoneyException;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/book")
@@ -100,5 +95,10 @@ public class BookingController {
             data.put(ticket.getId().toString(), ticket.getUser().getEmail());
         }
         return new ModelAndView("PdfReport", "data", data);
+    }
+
+    @ExceptionHandler(NotEnoughMoneyException.class)
+    public String notEnoughMoney(NotEnoughMoneyException ex) {
+        return "money-problem";
     }
 }

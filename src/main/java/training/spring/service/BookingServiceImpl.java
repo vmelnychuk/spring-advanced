@@ -2,12 +2,14 @@ package training.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import training.spring.entity.Ticket;
 import training.spring.entity.User;
 import training.spring.entity.UserAccount;
 import training.spring.repository.TicketRepository;
+import training.spring.service.exception.NotEnoughMoneyException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service("bookingService")
@@ -20,6 +22,7 @@ public class BookingServiceImpl implements BookingService {
     private UserAccountService userAccountService;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = NotEnoughMoneyException.class)
     public void bookTicket(Ticket ticket) {
         UserAccount userAccount = userAccountService.get(ticket.getUser());
         userAccountService.withdraw(userAccount, ticket.getPrice());
@@ -37,6 +40,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         Ticket ticket = ticketRepository.findOne(id);
         UserAccount userAccount = userAccountService.get(ticket.getUser());

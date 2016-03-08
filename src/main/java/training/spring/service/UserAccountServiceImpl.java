@@ -2,23 +2,27 @@ package training.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import training.spring.entity.User;
 import training.spring.entity.UserAccount;
 import training.spring.repository.UserAccountRepository;
-
+import training.spring.service.exception.NotEnoughMoneyException;
 
 import java.util.List;
 
 @Service("userAccountService")
 @Transactional
 public class UserAccountServiceImpl implements UserAccountService {
+
     @Autowired
     private UserAccountRepository userAccountRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public UserAccount get(User user) {
-        return userAccountRepository.findByUser(user);
+        List<UserAccount> accounts = userAccountRepository.findUserAccountsByUserEmail(user.getEmail());
+        return accounts.get(0);
     }
 
     @Override
@@ -28,7 +32,9 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public UserAccount update(UserAccount userAccount) {
-        return userAccountRepository.save(userAccount);
+        UserAccount savedUser = getById(userAccount.getId());
+        savedUser.setAmount(userAccount.getAmount());
+        return userAccountRepository.save(savedUser);
     }
 
     @Override
@@ -41,17 +47,22 @@ public class UserAccountServiceImpl implements UserAccountService {
         userAccountRepository.save(userAccounts);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void withdraw(UserAccount userAccount, int amount) {
-        Long currentBalance = userAccount.getMoney();
+        Long currentBalance = userAccount.getAmount();
         currentBalance -= amount;
-        userAccount.setMoney(currentBalance);
+        if(currentBalance < 0) {
+            throw new NotEnoughMoneyException("user: " + userAccount.getUser().getEmail() + " has not enough money");
+        }
+        userAccount.setAmount(currentBalance);
         userAccountRepository.save(userAccount);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Long check(UserAccount userAccount) {
-        return userAccount.getMoney();
+        return userAccount.getAmount();
     }
 
     @Override
@@ -60,15 +71,16 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserAccount getById(Long id) {
         return userAccountRepository.findOne(id);
     }
 
     @Override
     public void deposit(UserAccount userAccount, int ammount) {
-        Long currentBalance = userAccount.getMoney();
+        Long currentBalance = userAccount.getAmount();
         currentBalance += ammount;
-        userAccount.setMoney(currentBalance);
+        userAccount.setAmount(currentBalance);
         userAccountRepository.save(userAccount);
     }
 }

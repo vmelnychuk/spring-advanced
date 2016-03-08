@@ -1,10 +1,5 @@
 package training.spring.controller;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,15 +9,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import training.spring.entity.Ticket;
 import training.spring.entity.User;
 import training.spring.entity.UserAccount;
@@ -30,6 +19,11 @@ import training.spring.service.BookingService;
 import training.spring.service.UserAccountService;
 import training.spring.service.UserService;
 import training.spring.utils.ImportParser;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -168,7 +162,6 @@ public class UserController {
         StandardPasswordEncoder encoder = new StandardPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        userService.register(user);
         userAccount.setUser(user);
         userAccountService.create(userAccount);
 
