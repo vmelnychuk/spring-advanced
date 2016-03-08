@@ -1,10 +1,15 @@
+# Spring Advanced: Task 3
+
+Notes:
+- use the same options for DB as for task #2, but user account does not exists now.
+- import data first
+
 # Spring Advanced: Task 2
 
 Notes:
 - use MySQL, check db.properties for details
 - credentials from users.json file username == password
     - admin/admin
-    - user/user
     - manager/manager
     - several/several
 - import data for users and other entities:
@@ -12,7 +17,6 @@ Notes:
     - events.json
     - users.json
     - assigned-events.json
-    - tickets.json
 
 Task description:
 
