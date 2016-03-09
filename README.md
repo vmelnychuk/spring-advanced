@@ -1,5 +1,12 @@
 # Spring Advanced: Task 4 REST
 
+There are two REST endpoints:
+- /rest/book
+- /rest/user
+
+request for PDFs
+`curl --header "Accept: application/pdf" http://localhost:8080/rest/book`
+`curl --header "Accept: application/pdf" http://localhost:8080/rest/book/1`
 
 
 # Spring Advanced: Task 3

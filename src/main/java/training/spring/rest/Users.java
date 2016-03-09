@@ -9,7 +9,9 @@ import training.spring.entity.UserAccount;
 import training.spring.service.UserAccountService;
 import training.spring.service.UserService;
 import training.spring.vo.UserRequest;
+import training.spring.vo.UserResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,13 +25,18 @@ public class Users {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public List<User> getAll() {
-        return userService.getAll();
+    public List<UserResponse> getAll() {
+        List<User> users = userService.getAll();
+        List<UserResponse> response = new ArrayList<>();
+        for (User user: users) {
+            response.add(new UserResponse(user));
+        }
+        return response;
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public User add(@RequestBody UserRequest userRequest) {
+    public UserResponse add(@RequestBody UserRequest userRequest) {
         String name = userRequest.getName();
         String email = userRequest.getEmail();
         String password = userRequest.getPassword();
@@ -45,7 +52,7 @@ public class Users {
         userAccount.setUser(user);
         userAccount.setAmount((long) amount);
         userAccountService.create(userAccount);
-        return user;
+        return new UserResponse(user);
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET, produces = "application/json")

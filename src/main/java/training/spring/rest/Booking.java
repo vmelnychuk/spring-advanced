@@ -13,7 +13,9 @@ import training.spring.service.BookingService;
 import training.spring.service.EventService;
 import training.spring.service.UserService;
 import training.spring.vo.TicketRequest;
+import training.spring.vo.TicketResponse;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +34,13 @@ public class Booking {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public List<Ticket> getAll() {
+    public List<TicketResponse> getAll() {
         List<Ticket> tickets = bookingService.getAll();
-        return tickets;
+        List<TicketResponse> response = new ArrayList<>();
+        for(Ticket ticket : tickets) {
+            response.add(new TicketResponse(ticket));
+        }
+        return response;
     }
 
     @RequestMapping(method = RequestMethod.GET, headers = "Accept=application/pdf")
@@ -50,7 +56,7 @@ public class Booking {
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public Ticket add(@RequestBody TicketRequest ticketRequest) {
+    public TicketResponse add(@RequestBody TicketRequest ticketRequest) {
         User user = userService.getUserByEmail(ticketRequest.getEmail());
         AssignedEvent assignedEvent = eventService.getAssigned(ticketRequest.getAssignedEventId());
         int seat = ticketRequest.getSeat();
@@ -60,14 +66,14 @@ public class Booking {
         ticket.setSeat(seat);
         ticket.setPrice(assignedEvent.getEvent().getPrice());
         bookingService.bookTicket(ticket);
-        return ticket;
+        return new TicketResponse(ticket);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public Ticket get(@PathVariable("id") Long id) {
+    public TicketResponse get(@PathVariable("id") Long id) {
         Ticket ticket = bookingService.get(id);
-        return ticket;
+        return new TicketResponse(ticket);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/pdf")
