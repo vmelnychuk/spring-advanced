@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import training.spring.entity.AssignedEvent;
 import training.spring.entity.Ticket;
 import training.spring.entity.User;
@@ -13,7 +14,9 @@ import training.spring.service.EventService;
 import training.spring.service.UserService;
 import training.spring.vo.TicketRequest;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/rest/book")
@@ -32,6 +35,17 @@ public class Booking {
     public List<Ticket> getAll() {
         List<Ticket> tickets = bookingService.getAll();
         return tickets;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, headers = "Accept=application/pdf")
+    public ModelAndView getAllPdf() {
+        Map<String,String> data = new LinkedHashMap<String,String>();
+        List<Ticket> tikets = bookingService.getAll();
+        data.put("id", "ticket");
+        for(Ticket ticket: tikets) {
+            data.put(ticket.getId().toString(), bookingService.printTicket(ticket));
+        }
+        return new ModelAndView("PdfReport", "data", data);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
@@ -54,6 +68,15 @@ public class Booking {
     public Ticket get(@PathVariable("id") Long id) {
         Ticket ticket = bookingService.get(id);
         return ticket;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/pdf")
+    public ModelAndView getPdf(@PathVariable("id") Long id) {
+        Map<String,String> data = new LinkedHashMap<String,String>();
+        Ticket ticket = bookingService.get(id);
+        data.put("id", "ticket");
+        data.put(id.toString(), bookingService.printTicket(ticket));
+        return new ModelAndView("PdfReport", "data", data);
     }
 
 
