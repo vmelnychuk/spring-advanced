@@ -44,8 +44,8 @@ import javax.xml.bind.annotation.XmlType;
     "email",
     "amount"
 })
-@XmlRootElement(name = "CreateUserRequest")
-public class CreateUserRequest {
+@XmlRootElement(name = "GetUserInfoResponse")
+public class GetUserInfoResponse {
 
     @XmlElement(required = true)
     protected String name;

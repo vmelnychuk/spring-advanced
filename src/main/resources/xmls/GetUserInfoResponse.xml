@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetUserInfoResponse xmlns="http://localhost:8080/cinema">
+    <name>User</name>
+    <password>Password</password>
+    <email>email</email>
+    <amount>1000</amount>
+</GetUserInfoResponse>

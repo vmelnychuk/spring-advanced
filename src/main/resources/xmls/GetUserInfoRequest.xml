@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetUserInfoRequest xmlns="http://localhost:8080/cinema">
+    <id>200</id>
+</GetUserInfoRequest>

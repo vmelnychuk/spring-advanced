@@ -1,6 +1,8 @@
 # Spring Advanced: Task 4
 Endpoint URL: http://localhost:8080/ws/UserWebService.wsdl
 
+Generate new beans from xsd: `mvn clean jaxb2:xjc`
+
 
 # Spring Advanced: Task 3
 
