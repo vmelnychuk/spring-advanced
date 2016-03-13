@@ -1,3 +1,7 @@
+# Spring Advanced: Task 4
+Endpoint URL: http://localhost:8080/ws/UserWebService.wsdl
+
+
 # Spring Advanced: Task 3
 
 Notes:
