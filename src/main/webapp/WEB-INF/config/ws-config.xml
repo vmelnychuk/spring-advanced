@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:sws="http://www.springframework.org/schema/web-services"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services.xsd">
+
+    <context:component-scan base-package="training.spring.webservice.configuration" />
+
+    <!--<bean id="marshaller" class="org.springframework.oxm.castor.CastorMarshaller">-->
+        <!--<property name="mappingLocation" value="classpath:mapping.xml"/>-->
+    <!--</bean>-->
+
+    <!--<sws:annotation-driven marshaller="marshaller"/>-->
+
+    <!--<sws:dynamic-wsdl id="user" portTypeName="User" locationUri="/">-->
+        <!--<sws:xsd location="classpath:user.xsd"/>-->
+    <!--</sws:dynamic-wsdl>-->
+
+</beans>
